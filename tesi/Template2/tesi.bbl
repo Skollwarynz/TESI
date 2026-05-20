@@ -1,0 +1,230 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\datalist[entry]{nty/global//global/global/global}
+  \entry{BaierKatoen}{book}{}{}
+    \name{author}{2}{}{%
+      {{hash=BC}{%
+         family={Baier},
+         familyi={B\bibinitperiod},
+         given={Christel},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=KJP}{%
+         family={Katoen},
+         familyi={K\bibinitperiod},
+         given={Joost-Pieter},
+         giveni={J\bibinithyphendelim P\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {MIT Press}%
+    }
+    \strng{namehash}{BCKJP1}
+    \strng{fullhash}{BCKJP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{B}
+    \field{sortinithash}{B}
+    \field{title}{Principles of Model Checking}
+    \field{year}{2008}
+  \endentry
+
+  \entry{APS4}{inproceedings}{}{}
+    \name{author}{3}{}{%
+      {{hash=HEM}{%
+         family={Hahn},
+         familyi={H\bibinitperiod},
+         given={E.\bibnamedelima Moritz},
+         giveni={E\bibinitperiod\bibinitdelim M\bibinitperiod},
+      }}%
+      {{hash=HA}{%
+         family={Hartmanns},
+         familyi={H\bibinitperiod},
+         given={Arnd},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=HH}{%
+         family={Hermanns},
+         familyi={H\bibinitperiod},
+         given={Holger},
+         giveni={H\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{HEMHAHH1}
+    \strng{fullhash}{HEMHAHH1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{H}
+    \field{sortinithash}{H}
+    \field{booktitle}{International Conference on Quantitative Evaluation of
+  Systems}
+    \field{pages}{185\bibrangedash 194}
+    \field{title}{Reachability and Reward Checking for Stochastic Timed
+  Automata}
+    \field{year}{2011}
+  \endentry
+
+  \entry{APS5}{inproceedings}{}{}
+    \name{author}{3}{}{%
+      {{hash=HH}{%
+         family={Hermanns},
+         familyi={H\bibinitperiod},
+         given={Holger},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=MKJ}{%
+         family={Meyer-Kayser},
+         familyi={M\bibinithyphendelim K\bibinitperiod},
+         given={J.},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=SM}{%
+         family={Siegle},
+         familyi={S\bibinitperiod},
+         given={M.},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{HHMKJSM1}
+    \strng{fullhash}{HHMKJSM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{H}
+    \field{sortinithash}{H}
+    \field{booktitle}{Numerical Solution of Markov Chains}
+    \field{pages}{101\bibrangedash 120}
+    \field{title}{Multi Terminal Binary Decision Diagrams to Represent and
+  Analyse Continuous Time Markov Chains}
+    \field{year}{1999}
+  \endentry
+
+  \entry{APS2}{article}{}{}
+    \name{author}{3}{}{%
+      {{hash=KM}{%
+         family={Kwiatkowska},
+         familyi={K\bibinitperiod},
+         given={Marta},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=NG}{%
+         family={Norman},
+         familyi={N\bibinitperiod},
+         given={Gethin},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=PD}{%
+         family={Parker},
+         familyi={P\bibinitperiod},
+         given={David},
+         giveni={D\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{KMNGPD1}
+    \strng{fullhash}{KMNGPD1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{K}
+    \field{sortinithash}{K}
+    \field{pages}{220\bibrangedash 270}
+    \field{title}{Stochastic Model Checking}
+    \field{journaltitle}{Formal Methods for the Design of Real-Time Systems}
+    \field{year}{2004}
+  \endentry
+
+  \entry{APS1}{inproceedings}{}{}
+    \name{author}{3}{}{%
+      {{hash=NG}{%
+         family={Norman},
+         familyi={N\bibinitperiod},
+         given={Gethin},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=PD}{%
+         family={Parker},
+         familyi={P\bibinitperiod},
+         given={David},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=SJ}{%
+         family={Sproston},
+         familyi={S\bibinitperiod},
+         given={Jeremy},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{NGPDSJ1}
+    \strng{fullhash}{NGPDSJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{N}
+    \field{sortinithash}{N}
+    \field{booktitle}{Formal Modeling and Analysis of Timed Systems}
+    \field{pages}{16\bibrangedash 31}
+    \field{title}{Model Checking for Probabilistic Timed Automata}
+    \field{year}{2004}
+  \endentry
+
+  \entry{APS3}{inproceedings}{}{}
+    \name{author}{3}{}{%
+      {{hash=VI}{%
+         family={Valkov},
+         familyi={V\bibinitperiod},
+         given={Ivaylo},
+         giveni={I\bibinitperiod},
+      }}%
+      {{hash=DAF}{%
+         family={Donaldson},
+         familyi={D\bibinitperiod},
+         given={Alastair\bibnamedelima F.},
+         giveni={A\bibinitperiod\bibinitdelim F\bibinitperiod},
+      }}%
+      {{hash=MA}{%
+         family={Miller},
+         familyi={M\bibinitperiod},
+         given={Alice},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{VIDAFMA1}
+    \strng{fullhash}{VIDAFMA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{V}
+    \field{sortinithash}{V}
+    \field{booktitle}{International Conference on Tools and Algorithms for the
+  Construction and Analysis of Systems}
+    \field{pages}{497\bibrangedash 512}
+    \field{title}{Synchronisation in Language-level Symmetry Reduction for
+  Probabilistic Model Checking}
+    \field{year}{2011}
+  \endentry
+\enddatalist
+\endinput

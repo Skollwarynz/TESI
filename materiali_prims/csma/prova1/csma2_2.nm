@@ -1,0 +1,53 @@
+mdp
+
+//----------------------------------------------------------------------------------------------------------------------------
+// MODELLO BASE SIMMETRICO (stationA1)
+module stationA1
+	
+	sA1 : [0..4]; 
+	xA1 : [0..30];
+	bcA1 : [0..3];
+	cdA1 : [0..2];
+	
+	[send] (sA1=0) -> (sA1'=1) & (xA1'=0); 
+	[busy] (sA1=0) -> (sA1'=2) & (xA1'=0) & (cdA1'=min(2,cdA1+1)); 
+	
+	[time] (sA1=1) & (xA1<30) -> (xA1'=min(xA1+1,30)); 
+	[end]  (sA1=1) & (xA1=30) -> (sA1'=4) & (xA1'=0); 
+	[cd]   (sA1=1) -> (sA1'=2) & (xA1'=0) & (cdA1'=min(2,cdA1+1)); 
+	
+	[] sA1=2 & cdA1=1 -> 0.5 : (sA1'=3) & (bcA1'=0) + 0.5 : (sA1'=3) & (bcA1'=1) ;
+	[] sA1=2 & cdA1=2 -> 0.25 : (sA1'=3) & (bcA1'=0) + 0.25 : (sA1'=3) & (bcA1'=1) + 0.25 : (sA1'=3) & (bcA1'=2) + 0.25 : (sA1'=3) & (bcA1'=3) ;
+	
+	[time] (sA1=3) & (xA1<2) -> (xA1'=xA1+1); 
+	[time] (sA1=3) & (xA1=2) & (bcA1>0) -> (xA1'=1) & (bcA1'=bcA1-1); 
+	[send] (sA1=3) & (xA1=2) & (bcA1=0) -> (sA1'=1) & (xA1'=0); 
+	[busy] (sA1=3) & (xA1=2) & (bcA1=0) -> (sA1'=2) & (xA1'=0) & (cdA1'=min(2,cdA1+1)); 
+	
+	[time] (sA1=4) -> (xA1'=0);
+
+endmodule
+
+//----------------------------------------------------------------------------------------------------------------------------
+// IL BUS (Rinominato in "busshared" - rimosso qualsiasi numero per non confondere GRIP)
+module busshared1
+	
+	bshared : [0..2];
+	ya : [0..2]; 
+	yb : [0..2]; 
+	
+	[send] (bshared=0) -> (bshared'=1);
+	[send] (bshared=1|bshared=2) & (ya<1) -> (bshared'=2);
+	[end] (bshared=1) -> (bshared'=0) & (ya'=0);
+	[busy] (bshared=1|bshared=2) & (ya>=1) -> (bshared'=bshared);  
+	[cd] (bshared=2) & (yb<=1) -> (bshared'=0) & (ya'=0) & (yb'=0);
+	
+	[time] (bshared=0) -> (ya'=0); 
+	[time] (bshared=1) -> (ya'=min(ya+1,2)); 
+	[time] (bshared=2) & (yb<1) -> (ya'=min(ya+1,2)) & (yb'=min(yb+1,2)); 
+	
+endmodule
+
+//----------------------------------------------------------------------------------------------------------------------------
+// SECONDO MODELLO SIMMETRICO (In fondo al file, come richiesto dalla grammatica di GRIP)
+module stationA2 = stationA1 [ sA1=sA2, sA2=sA1, xA1=xA2, xA2=xA1, bcA1=bcA2, bcA2=bcA1, cdA1=cdA2, cdA2=cdA1 ] endmodule

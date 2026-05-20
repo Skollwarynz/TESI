@@ -1,0 +1,346 @@
+\documentclass[a4paper,10 pt,titlepage,twoside]{book}
+
+\usepackage[luatex]{color, graphicx}
+
+\usepackage{mathrsfs}
+\usepackage{array,epsfig}
+\usepackage{amsmath}
+\usepackage{eufrak}
+\usepackage{amsfonts}
+\usepackage{mathbbol}
+\usepackage{amssymb}
+\usepackage{amsxtra}
+\usepackage{amsthm}
+\usepackage{stmaryrd}
+\usepackage{tikz-cd}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{lmodern}
+\usepackage[english]{babel}
+\usepackage{geometry}
+\geometry{a4paper,top=3cm,bottom=3cm,left=3.5cm,right=3.5cm,heightrounded,bindingoffset=5mm}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{emptypage}
+%\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{enumerate}
+\usepackage{indentfirst}
+\usepackage{MnSymbol}
+
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\CP}{\mathbb{CP}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\LC}{\mathcal{L}}
+\newcommand{\support}{\mathrm{support}}
+\newcommand{\Oset}{\varnothing}
+\DeclareMathOperator{\id}{id}
+
+\numberwithin{equation}{chapter}
+\renewcommand{\theequation}{\thechapter.\arabic{equation}}
+%per gli spazi:
+\usepackage{setspace}
+\singlespacing
+
+\providecommand\phantomsection{}
+
+
+
+
+%\usepackage{stmaryrd} 
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[chapter] % reset theorem numbering for each chapter
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition} % definition numbers are dependent on theorem numbers
+\newtheorem{ex}[thm]{Example} % same for example numbers
+\newtheorem{rmk}[thm]{Remark}
+\newtheorem{notn}[thm]{Notation}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+
+%Here I define some theorem styles and shortcut commands for symbols I use often
+
+
+
+
+
+%Pagination stuff.
+\setlength{\topmargin}{-.3 in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textheight}{9.in}
+\setlength{\textwidth}{6.5in}
+\pagestyle{empty}
+
+
+\DeclareMathOperator{\obj}{Obj}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\mor}{Mor}
+\DeclareMathOperator{\iso}{Iso}
+\DeclareMathOperator{\ve}{vect}
+%\DeclareMathOperator{\diff}{diffmfd}
+\DeclareMathOperator{\g}{\mathfrak{g}}
+\DeclareMathOperator{\1}{\mathbb{1}}
+
+%\DeclareMathOperator{\del}{\partial\!}
+\newcommand{\del}{\partial}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\ind}{ind}
+\DeclareMathOperator{\ch}{ch}
+\DeclareMathOperator{\td}{Td}
+\DeclareMathOperator{\pf}{pf}   
+\DeclareMathOperator{\cl}{Cl}  
+\DeclareMathOperator{\htimes}{\hat{\otimes}}   
+\DeclareRobustCommand{\rchi}{{\mathpalette\irchi\relax}}
+\newcommand{\irchi}[2]{\raisebox{\depth}{$#1\chi$}} % inner command, used by \rchi
+
+\newcommand{\vect}[1]{\ensuremath{\begin{pmatrix}#1\end{pmatrix}}}
+
+% For Spin Geometry
+\DeclareMathOperator{\diff}{\operatorname{Diff}}
+
+% Lineare Algebra %
+\DeclareMathOperator{\rg}{rg}     % Rang
+\DeclareMathOperator{\diag}{diag} % Diagonalmatrix
+\DeclareMathOperator{\Mat}{M}   % Matritzenraum
+\DeclareMathOperator{\Eig}{Eig}   % Eigenräume
+\DeclareMathOperator{\End}{End} 
+\DeclareMathOperator{\Span}{Span} % lineare Huelle
+\DeclareMathOperator{\adj}{adj}   % Adjungierte
+\DeclareMathOperator{\Ann}{Ann}   % Annihilator
+\DeclareMathOperator{\Aut}{Aut}   % Automorphismen Gruppe
+\DeclareMathOperator{\Sp}{Sp}     % Symplektische Gruppe
+\DeclareMathOperator{\GL}{GL}     % Allgemeine Lineare Gruppe
+
+\DeclareMathOperator{\Tr}{Tr}     % Spur
+\DeclareMathOperator{\Ker}{Ker}   % Kern 
+\DeclareMathOperator{\Bild}{Im}   % Bild
+\DeclareMathOperator{\Hom}{Hom}   % Homomorphismen
+\DeclareMathOperator{\sgn}{sgn}   % Signum
+\DeclareMathOperator{\Deg}{Deg}   % Degree
+\DeclareMathOperator{\vol}{vol}   % Signum
+
+
+%\usepackage[backend=bibtex,
+%style=alphabetic,
+%sorting=ynt]{biblatex}
+%\addbibresource{Lit.bib}
+
+\setlength\parindent{24pt}
+
+
+\newcommand{\bigzero}{\mbox{\normalfont\Large\bfseries 0}}
+\newcommand{\rvline}{\hspace*{-\arraycolsep}\vline\hspace*{-\arraycolsep}}
+
+\usepackage{wasysym}
+\newcommand{\heart}{\gamma}
+\renewcommand\epsilon{\varepsilon}
+\renewcommand\phi{\varphi}
+
+\usepackage[utf8]{inputenc}
+\usepackage{times} % Per un font simile a quello dell'immagine
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning}
+\usepackage{fontspec}
+\newfontfamily\TahomaFont[
+Scale=1,Ligatures={TeX},
+BoldFont={Tahoma Bold}, 
+ItalicFont={Verdana Italic},
+]{Tahoma}
+
+\usepackage[absolute]{textpos}
+
+\begin{document}
+	
+	\thispagestyle{empty}
+	
+	\begingroup
+	\TahomaFont
+	
+	\begin{textblock*}{4cm}(8.65cm,1.03cm)
+		\centerline {\includegraphics[width=3.67cm]{LogoUniToConvertito.png}}
+	\end{textblock*}
+	
+	
+	\begin{textblock*}{21cm}(0cm,8,98cm)
+		\fontsize{18}{22}\selectfont
+		\centerline {\textbf{ Universit\`a degli Studi di Torino}}
+	\end{textblock*}
+	\begin{textblock*}{21cm}(0cm,9.97cm)
+		\fontsize{18}{22}\selectfont
+		\centerline {\textit{ Computer science}}
+	\end{textblock*}
+	
+	
+	\begin{textblock*}{21cm}(0cm,13.66cm)
+		\fontsize{20}{24}\selectfont
+		\centerline  {\textbf{Grip and symmPrism on probabilistic time automata}}
+	\end{textblock*}
+	\begin{textblock*}{21cm}(0cm,14.46cm)
+		\fontsize{18}{22}\selectfont
+		\centerline{\Large {Tesi di Laurea}}
+	\end{textblock*}
+	
+	
+	
+	\fontsize{14}{17}\selectfont
+	
+	\begin{textblock*}{8cm}(3.04cm,18.26cm)
+		\noindent 
+		\textbf{Relatore/Relatrice}
+	\end{textblock*}
+	\begin{textblock*}{8cm}(3.04cm,18.85cm)
+		\noindent 
+		Spronston Jeremy
+	\end{textblock*}
+	
+	\begin{textblock*}{8cm}(3.04cm,20.64cm)
+		\noindent 
+		\textbf{Correlatore/Correlatrice}
+	\end{textblock*}
+	\begin{textblock*}{8cm}(3.04cm,21.23cm)
+		\noindent
+		Cognome Nome
+	\end{textblock*}
+	
+	\begin{textblock*}{8cm}(12.33cm,22.95cm)
+		\noindent
+		\textbf{Candidato/a}
+	\end{textblock*}
+	\begin{textblock*}{8cm}(12.33cm,23.55cm)
+		\noindent	\textbf{Gallo Elio}
+	\end{textblock*}
+	\begin{textblock*}{8cm}(12.33cm,24.14cm)
+		\noindent	1109994
+	\end{textblock*}
+	
+	\begin{textblock*}{21cm}(0cm,27.34cm)
+		\centerline{Anno Accademico 2025/2026}
+	\end{textblock*}
+	
+	\endgroup
+	
+	
+	\newpage
+	$ $
+	
+	\TPoptions{absolute=false}
+	\pagestyle{plain}
+	\frontmatter
+	
+	%\newpage
+	
+	\tableofcontents
+	
+	
+	
+	\newpage
+	$ $
+	
+	\chapter*{Introduction}
+	\addcontentsline{toc}{chapter}{Introduction}
+	\section*{Markov Chains}
+	A Discrete time Markov chain is a tuple made up of five element: 
+	\begin{itemize}
+		\item A set of States not empty and countable 
+		\item A transition probability function that describe the different probability from one state to another. The sum of all transition functions must be one, so the total of probability. 
+		\item An initial distribution such that the sum of the initial states is one.
+		\item A set of atomic proposition that are distributed throught a labelling function 
+	\end{itemize}
+	A Markov chain is called finite if the set of States and atomic propositions are finite. If the number of states is infinite the Markov chain is too. 
+	
+	\section*{Model checking}
+	Model checking is a verification technique used in both hardware and software verification. It represents the problem inside a finite-state model and then checking the temporal and logic properties of the model. The model can introduce probability and discrete time division to simulate the case of study to verify. 
+	\section*{Cylinder State}
+	A cylinder state is a set of possible Paths in the timed automata that have the same prefix of path, more formally we define: 
+	The cylinder set of $\widehat{\pi} = s_0 \dots s_n \in \text{Paths}_{fin}(\mathcal{M})$ is defined as
+	\[
+	C(\widehat{\pi}) = \{ \pi \in \text{Paths}(\mathcal{Markov}) \mid \widehat{\pi} \in \text{prefix}(\pi) \}.
+	\] 
+	\section*{What is Prism?}
+	Prism is a program used to verify models formally. The program uses Multi-terminal Binary Decision Diagram (or MTBDDs) to store vector or probabilities and study them. The main focus of the program is to simulate the different path to calculate and measure properties that can be setted by the user. 
+	The models require a keyword that describe how the probability of the model have to be calculated. We can set the Markwo chain as probability calculation method. 
+	\section{What is GRIP? And how it works?}
+	Grip is a java program that parse the model written in Prism to use the cases of simmetry insiede the model. The objective of this parsing process is to reduce the number or states that Prism need to calculate before starting the verification process. 
+	
+\begin{figure}[htbp]
+	\centering
+	\resizebox{\textwidth}{!}{ 
+		\begin{tikzpicture}[
+			node distance=1cm,
+			block/.style={
+				rectangle, 
+				draw=teal!70!black, 
+				fill=orange!20,
+				thick,
+				rounded corners=15pt, 
+				text centered, 
+				minimum height=1.5cm, 
+				minimum width=3.2cm,
+				inner sep=6pt,
+				text width=3.2cm,
+				font=\small\sffamily
+			},
+			arrow/.style={thick, ->, >=Stealth},
+			redarrow/.style={thick, ->, >=Stealth, draw=red!70!black}
+			]
+			\node (n1) [block] {Fully symmetric input specification};
+			\node (n2) [block, right=of n1] {Abstract syntax tree (AST) representation of model};
+			\node (n3) [block, right=of n2] {Translate the AST based on SPSL translation rules};
+			\node (n4) [block, right=of n3] {Reduced specification};
+			
+			\draw [arrow] (n1) -- (n2);
+			\draw [redarrow] (n2) -- (n3);
+			\draw [arrow] (n3) -- (n4);
+		\end{tikzpicture}
+	}
+	\caption{Workflow del sistema GRIP.}
+\end{figure}
+	
+	\chapter{Title of the third chapter}
+	A quotation \cite{APS1}
+	
+	A reference to a numbered formula \eqref{ps:2}
+	
+	A reference to the first section of the first chapter \ref{sec:11}
+	
+	\chapter*{Ringraziamenti}
+	
+	Ringraziamenti
+	
+	\phantom{p. 1}
+	\clearpage
+	\thispagestyle{empty}
+	\phantom{p. 2}
+	\clearpage
+	\addcontentsline{toc}{chapter}{References}
+	
+	\begin{thebibliography}
+		\bibitem{APS1}
+		Gethin Norman, David Parker, Jeremy Sproston (1975), \emph{Model Checking for Probabilistic Timed Automata}, Math.Pro c. Cambridge Philos. Soc. \textbf{77}, 43-69. 
+		
+		\bibitem{APS2}
+		Marta Kwiatkowska, Gethin Norman, David Parker (1975), \emph{Stochastic Model Checking}, School of Computer Science, University of Birmingham \textbf{78}, no. 3, 405-432.
+		
+		\bibitem{APS3}
+		Ivaylo Valkov, Alastair F. Donaldson, Alice Miller (1976), \emph{Synchronisation in Language-level Symmetry Reduction for Probabilistic Model Checking}, University of Glasgow, UK, Imperial College London, UK\textbf{79}, no. 1, 71-99.
+		
+		\bibitem{APS4}
+		E. Moritz Hahn1, Arnd Hartmanns2, Holger Hermanns2 (1976), \emph{Reachability and Reward Checking for Stochastic Timed Automata}, State Key Laboratory of Computer Science Institute of Software, Chinese Academy of Sciences China, Saarland University – Computer Science Saarbrücken, Germany\textbf{79}, no. 1, 71-99.
+		
+		\bibitem{APS5}
+		H. Hermanns, J. Meyer-Kayser, M. Siegle (1976), \emph{Multi Terminal Binary Decision Diagrams to Represent and Analyse Continuous Time Markov Chains}, Systems Validation Centre, Dept. of Computer Science, University of Twente, The Netherlands IMMD 7, Dept. of Computer Science, University of Erlangen-Nurnberg, Germany \textbf{79}, no. 1, 71-99.
+		
+		\bibitem{APS5}
+		Christel Baier, Joost-Pieter Katoen (2008), \emph{Principles of Model Checking}, Systems Validation Centre, Dept. of Computer Science, University of Twente, The Netherlands IMMD 7, Dept. of Computer Science, University of Erlangen-Nurnberg, Germany \textbf{79}, no. 1, 71-99.
+		
+	\end{thebibliography}
+	
+\end{document}

@@ -1,0 +1,155 @@
+\chapter*{Introduction}
+\addcontentsline{toc}{chapter}{Introduction}
+	\addcontentsline{toc}{chapter}{Introduction}
+	\section*{Markov Chains}
+	A Discrete time Markov chain is a tuple made up of five element: 
+	\begin{itemize}
+		\item A set of States not empty and countable 
+		\item A transition probability function that describe the different probability from one state to another. The sum of all transition functions must be one, so the total of probability. 
+		\item An initial distribution such that the sum of the initial states is one.
+		\item A set of atomic proposition that are distributed throught a labelling function 
+	\end{itemize}
+	A Markov chain is called finite if the set of States and atomic propositions are finite. If the number of states is infinite the Markov chain is too. 
+	
+	\section*{Model checking}
+	Model checking is a verification technique used in both hardware and software verification. It represents the problem inside a finite-state model and then checking the temporal and logic properties of the model. The model can introduce probability and discrete time division to simulate the case of study to verify. 
+	\section*{Cylinder State}
+	A cylinder state is a set of possible Paths in the timed automata that have the same prefix of path, more formally we define: 
+	The cylinder set of $\widehat{\pi} = s_0 \dots s_n \in \text{Paths}_{fin}(\mathcal{M})$ is defined as
+	\[
+	C(\widehat{\pi}) = \{ \pi \in \text{Paths}(\mathcal{Markov}) \mid \widehat{\pi} \in \text{prefix}(\pi) \}.
+	\] 
+	\section*{What is Prism?}
+  Prism is a open-source software used for formal verification on stocastic automata. Instead of giving a specific answer of an event it calculate the probability of researched on user setted properties. 
+  The program calculate automatically the probability of that specific propertie and show the result baesed on the model given in input. The probability calculation can be decided throught different type of 
+  model: 
+  \begin{itemize}
+    \item dtmc (Discrete-time Markov chain)
+    \item ctmc (Continuous-time Markov chain)
+    \item mdp (Markov Decision process)
+    \item pta (Probabilistic timed automata)
+  \end{itemize}
+\section{What is GRIP? And how it works?}
+	Grip is a java program that parse the model written in Prism to use the cases of simmetry insiede the model. The objective of this parsing process is to reduce the number or states that Prism need to calculate before starting the verification process. 
+	
+\begin{figure}[htbp]
+    \centering % Centra l'intero diagramma orizzontalmente nella pagina
+    \begin{tikzpicture}
+        [node distance=1.2cm and 0.5cm, % Spaziatura tra i nodi
+        block/.style={
+            draw=black!60,
+            fill=orange!12, % Colore beige/arancione tenue
+            text width=3.1cm,
+            align=center,
+            minimum height=1.2cm,
+            rounded corners=14pt,
+            font=\sffamily\small,
+            line width=0.6pt
+        },
+        arrow/.style={
+            -{Stealth[scale=1.0]},
+            line width=0.8pt,
+            draw=black!80
+        },
+        redarrow/.style={
+            -{Stealth[scale=1.0]},
+            line width=0.8pt,
+            draw=red!80!black
+        }]
+
+        % Definizione dei Nodi
+        \node [block] (input) {Fully symmetric input specification};
+        \node [block, right=of input, text width=3.4cm] (ast) {Abstract syntax tree (AST) representation of model};
+        \node [block, right=of ast, text width=3.2cm] (translate) {Translate the AST based on SPSL translation rules};
+        \node [block, right=of translate, text width=2.4cm] (reduced) {Reduced specification};
+
+        % Definizione dei Collegamenti (Frecce)
+        \draw [arrow] (input) -- (ast);
+        \draw [redarrow] (ast) -- (translate);
+        \draw [arrow] (translate) -- (reduced);
+
+    \end{tikzpicture}
+    \caption{Workflow di GRIP.}
+    \label{fig:grip_workflow}
+\end{figure}
+
+With syncronization:
+\begin{figure}[htbp]
+\centering
+% Il resizebox assicura che il grafico sia largo esattamente quanto il testo, centrandolo ed evitando tagli a destra
+\resizebox{\textwidth}{!}{
+\begin{tikzpicture}[
+    % Stile globale per i blocchi rettangolari
+    block/.style={
+        rectangle, 
+        draw=teal!70!black, 
+        fill=orange!15, 
+        thick, 
+        text width=3.3cm, 
+        align=center, 
+        minimum height=1.4cm,
+        font=\small\sffamily
+    },
+    % Stile per i connettivi logici e operatori
+    operator/.style={
+        font=\large\bfseries,
+        inner sep=4pt
+    },
+    node distance=0.8cm and 0.4cm
+]
+
+% --- LIVELLO 1 (Ancorato partendo dal blocco centrale per perfetta simmetria) ---
+\node[block] (symm) {Symmetric Expr ($M$)\\ $y$};
+\node[operator, left=of symm] (and1) {$\wedge$};
+\node[block, left=of and1] (local) {Local Expression ($M$)\\ $e$};
+\node[operator, right=of symm] (impl1) {$\rightarrow$};
+\node[block, right=of impl1, xshift=1.0cm] (stoch) {Stochastic Update ($M$)\\ $su$};
+
+% --- LIVELLO 2 ---
+\node[block, below=of local] (states) {Local states satisfying\\ $e \wedge y$\\ $l \in \text{SAT}_M(e)$};
+\node[block, below=of symm] (val) {Symmetric Expr ($M$)\\ with evaluation of global variables\\ $y^1 \dots y^n$};
+
+% --- LIVELLO 3 ---
+\node[block, below=of states] (red_expr) {Simplified expressions for each local state\\ $\text{count\_M\_}f_M(l) > 0$\\ $\text{count\_M\_}f_M(l) > i$};
+\node[operator, right=of red_expr] (and2) {$\wedge$};
+\node[block, below=of val] (red_ctx) {Simplified expressions in context $l$ independent of local variables};
+\node[operator, right=of red_ctx] (impl2) {$\rightarrow$};
+
+% Blocchi di destra (sotto Stochastic Update) aligned orizzontalmente con il livello 3
+\node[block, right=of impl2] (red_state_up) {Simplified updates for each local state\\ $\text{count\_M\_}f_M(l') -= 1$\\ $\text{count\_M\_}f_M(l) += 1$};
+\node[operator, right=of red_state_up] (and3) {$\wedge$};
+\node[block, right=of and3] (red_glob_up) {Simplified global updates in the context of $l$};
+
+% --- LIVELLO 4 (Blocco finale perfettamente centrato rispetto all'asse principale) ---
+\node[block, below=of red_ctx, yshift= -1.5cm, xshift=1.8cm, text width=5.5cm] (translated) {Final Translated Statement};
+
+
+% --- GENERAZIONE DELLE FRECCE ORTOGONALI ---
+\path [-{Stealth[scale=1.2]}]
+    (local) edge (states)
+    (states) edge (red_expr)
+    (symm) edge (val)
+    (val) edge (red_ctx);
+
+% 1. Freccia dal lato destro di 'symm' che entra ortogonalmente sul lato destro di 'val'
+\draw [-{Stealth[scale=1.2]}] (symm.east) -- ++(0.3,0) |- (val.east);
+
+% 2. Doppia diramazione a "T" rovesciata da Stochastic Update verso i due blocchi sottostanti (linee dritte a 90°)
+\draw [-{Stealth[scale=1.2]}] (stoch.south) -- ++(0,-0.6) -| (red_state_up.north);
+\draw [-{Stealth[scale=1.2]}] (stoch.south) -- ++(0,-0.6) -| (red_glob_up.north);
+
+% 3. Frecce di convergenza inferiori verso 'Final Translated Statement'
+% Usiamo la logica pass-through ortogonale (|- o -|) per garantire angoli retti puliti sulla parte superiore del blocco finale
+\draw [-{Stealth[scale=1.2]}] (red_expr.south) -- ++(0,-0.8) -| (translated.210);
+\draw [-{Stealth[scale=1.2]}] (red_ctx.south) -- ++(0,-0.6) -| (translated.150);
+\draw [-{Stealth[scale=1.2]}] (red_state_up.south) -- ++(0,-0.6) -| (translated.30);
+\draw [-{Stealth[scale=1.2]}] (red_glob_up.south) -- ++(0,-0.8) -| (translated.330);
+
+\end{tikzpicture}
+}
+\caption{Generic Representatives with Synchronisation Workflow}
+\end{figure}
+
+
+\newpage
+$ $
