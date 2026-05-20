@@ -1,37 +1,42 @@
 \chapter*{Introduction}
 \addcontentsline{toc}{chapter}{Introduction}
 	\addcontentsline{toc}{chapter}{Introduction}
-	\section*{Markov Chains}
+	\section {Markov Chains}
 	A Discrete time Markov chain is a tuple made up of five element: 
 	\begin{itemize}
-		\item A set of States not empty and countable 
+		\item A set S of States not empty and countable 
 		\item A transition probability function that describe the different probability from one state to another. The sum of all transition functions must be one, so the total of probability. 
 		\item An initial distribution such that the sum of the initial states is one.
 		\item A set of atomic proposition that are distributed throught a labelling function 
 	\end{itemize}
 	A Markov chain is called finite if the set of States and atomic propositions are finite. If the number of states is infinite the Markov chain is too. 
 	
-	\section*{Model checking}
+	\section{Model checking}
 	Model checking is a verification technique used in both hardware and software verification. It represents the problem inside a finite-state model and then checking the temporal and logic properties of the model. The model can introduce probability and discrete time division to simulate the case of study to verify. 
-	\section*{Cylinder State}
+	\section{Cylinder State}
 	A cylinder state is a set of possible Paths in the timed automata that have the same prefix of path, more formally we define: 
 	The cylinder set of $\widehat{\pi} = s_0 \dots s_n \in \text{Paths}_{fin}(\mathcal{M})$ is defined as
 	\[
 	C(\widehat{\pi}) = \{ \pi \in \text{Paths}(\mathcal{Markov}) \mid \widehat{\pi} \in \text{prefix}(\pi) \}.
 	\] 
 	\section*{What is Prism?}
-  Prism is a open-source software used for formal verification on stocastic automata. Instead of giving a specific answer of an event it calculate the probability of researched on user setted properties. 
-  The program calculate automatically the probability of that specific propertie and show the result baesed on the model given in input. The probability calculation can be decided throught different type of 
-  model: 
+PRISM is an open-source probabilistic model checker used for the formal verification of stochastic systems.
+Unlike traditional testing methods that provide a simple pass/fail answer for specific scenarios, PRISM quantifies system behavior by calculating
+the exact probability of whether user-specified properties will occur (e.g., "What is the probability that a network collision occurs within 5 seconds?").
+The software automatically computes these probabilities based on the formal model provided as input.
+Depending on the nature and time-domain of the system being analyzed, PRISM supports four primary types of models:
   \begin{itemize}
-    \item dtmc (Discrete-time Markov chain)
-    \item ctmc (Continuous-time Markov chain)
-    \item mdp (Markov Decision process)
-    \item pta (Probabilistic timed automata)
+    \item DTMC (Discrete-Time Markov Chain): Used when time evolves in discrete steps or clock cycles
+    \item CTMC (Continuous-Time Markov Chain): Used when events can happen at any continuous point in time, with durations modeled using transition rates
+    \item MDP (Markov Decision Process): Used to model systems that exhibit both probabilistic behavior and nondeterminism.
+      This is ideal for analyzing concurrency, scheduling protocols, or strategic decision-making where a controller interacts with an uncertain environment.
+    \item PTA (Probabilistic Timed Automata): Used for systems that require a strict representation of real-time constraints alongside probability, modeled through continuous clocks and timeouts
   \end{itemize}
+  
 \section{What is GRIP? And how it works?}
-	Grip is a java program that parse the model written in Prism to use the cases of simmetry insiede the model. The objective of this parsing process is to reduce the number or states that Prism need to calculate before starting the verification process. 
-	
+Grip is an open-source tool for symmetry reduction in model checking, originally developed at the University of Glasgow.
+The tool produces a parsed model of Prism to reduce symmetry in the original model. The process simulate a transaltion of code where the input model modify the different repetition of modules into 
+a single one. 
 \begin{figure}[htbp]
     \centering % Centra l'intero diagramma orizzontalmente nella pagina
     \begin{tikzpicture}
