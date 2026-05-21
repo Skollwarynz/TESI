@@ -1,0 +1,27 @@
+nondeterministic
+
+global id : [ 1 .. 4 ] init 1 ; 
+global idd : [ 1 .. 4 ] init 2 ; 
+global iddd : [ 1 .. 4 ] init 3 ; 
+global idddd : [ 1 .. 4 ] init 4 ; 
+
+module robot
+
+  x : [ 0 .. 1 ] init 0 ; 
+  y : [ 0 .. 1 ] init 0 ; 
+  actual_id : [ 1 .. 4 ] init 1 ; 
+
+  [] (x=0)&(y=0) -> 0.25:(x'=x)&(y'=y)&(actual_id'=id)+0.25:(x'=x+1)&(y'=y)&(actual_id'=iddd)+0.25:(x'=x)&(y'=y+1)&(actual_id'=idd)+0.25:(x'=x+1)&(y'=y+1)&(actual_id'=idddd);
+  [] (x=1)&(y=0) -> 0.25:(x'=x)&(y'=y)&(actual_id'=iddd)+0.25:(x'=x-1)&(y'=y)&(actual_id'=id)+0.25:(x'=x)&(y'=y+1)&(actual_id'=idddd)+0.25:(x'=x-1)&(y'=y+1)&(actual_id'=idd);
+  [] (x=0)&(y=1) -> 0.25:(x'=x)&(y'=y)&(actual_id'=idd)+0.25:(x'=x+1)&(y'=y)&(actual_id'=idddd)+0.25:(x'=x)&(y'=y-1)&(actual_id'=id)+0.25:(x'=x+1)&(y'=y-1)&(actual_id'=iddd);
+  [] (x=1)&(y=1) -> 0.25:(x'=x)&(y'=y)&(actual_id'=idddd)+0.25:(x'=x-1)&(y'=y)&(actual_id'=idd)+0.25:(x'=x)&(y'=y-1)&(actual_id'=iddd)+0.25:(x'=x-1)&(y'=y-1)&(actual_id'=id);
+endmodule
+
+module generic_process
+ no_0 : [0..4] init 4;    // No modules in state (0)
+ no_1 : [0..4] init 0;    // No modules in state (1)
+
+  [] (no_0>0) -> (no_0'=no_0-1)&(no_1'=no_1+1);
+  [] (no_1>0) -> (no_1'=no_1-1)&(no_0'=no_0+1);
+
+endmodule

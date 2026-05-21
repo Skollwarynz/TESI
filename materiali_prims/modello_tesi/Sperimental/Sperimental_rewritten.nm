@@ -1,0 +1,32 @@
+mdp
+
+global ID1 : [1..4] init 1;
+global ID2 : [1..4] init 2;
+global ID3 : [1..4] init 3;
+global ID4 : [1..4] init 4;
+
+module robot
+
+	x : [0..1] init 0;
+	y : [0..1] init 0;
+	actual_id : [1..4] init 1;
+
+	[] (x=0) & (y=0) -> 0.25 : (x'=x) & (y'=y) & (actual_id'=ID1) + 0.25 : (x'=x+1) & (y'=y) & (actual_id'=ID3) + 0.25 : (x'=x) & (y'=y+1) & (actual_id'=ID2) + 0.25 : (x'=x+1) & (y'=y+1) & (actual_id'=ID4); 
+	[] (x=1) & (y=0) -> 0.25 : (x'=x) & (y'=y) & (actual_id'=ID3) + 0.25 : (x'=x-1) & (y'=y) & (actual_id'=ID1) + 0.25 : (x'=x) & (y'=y+1) & (actual_id'=ID4) + 0.25 : (x'=x-1) & (y'=y+1) & (actual_id'=ID2);
+	[] (x=0) & (y=1) -> 0.25 : (x'=x) & (y'=y) & (actual_id'=ID2) + 0.25 : (x'=x+1) & (y'=y) & (actual_id'=ID4) + 0.25 : (x'=x) & (y'=y-1) & (actual_id'=ID1) + 0.25 : (x'=x+1) & (y'=y-1) & (actual_id'=ID3);
+	[] (x=1) & (y=1) -> 0.25 : (x'=x) & (y'=y) & (actual_id'=ID4) + 0.25 : (x'=x-1) & (y'=y) & (actual_id'=ID2) + 0.25 : (x'=x) & (y'=y-1) & (actual_id'=ID3) + 0.25 : (x'=x-1) & (y'=y-1) & (actual_id'=ID1);
+
+endmodule
+
+module cell1
+
+	state1 : [0..1] init 0;
+
+	[] (state1=0) -> (state1'=1);
+	[] (state1=1) -> (state1'=0);
+
+endmodule 
+
+module cell2 = cell1 [ state1 = state2, state2 = state1 ] endmodule 
+module cell3 = cell1 [ state1 = state3, state3 = state1 ] endmodule 
+module cell4 = cell1 [ state1 = state4, state4 = state1 ] endmodule
