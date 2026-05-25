@@ -1,9 +1,9 @@
 mdp
 
-global ID1 : [1..4] init 1;
-global ID2 : [1..4] init 2;
-global ID3 : [1..4] init 3;
-global ID4 : [1..4] init 4;
+global id : [1..4] init 1;
+global idd : [1..4] init 2;
+global iddd : [1..4] init 3;
+global idddd : [1..4] init 4;
 
 module robot
 
@@ -11,22 +11,27 @@ module robot
 	y : [0..1] init 0;
 	actual_id : [1..4] init 1;
 
-	[] (x=0) & (y=0) -> 0.25 : (x'=x) & (y'=y) & (actual_id'=ID1) + 0.25 : (x'=x+1) & (y'=y) & (actual_id'=ID3) + 0.25 : (x'=x) & (y'=y+1) & (actual_id'=ID2) + 0.25 : (x'=x+1) & (y'=y+1) & (actual_id'=ID4); 
-	[] (x=1) & (y=0) -> 0.25 : (x'=x) & (y'=y) & (actual_id'=ID3) + 0.25 : (x'=x-1) & (y'=y) & (actual_id'=ID1) + 0.25 : (x'=x) & (y'=y+1) & (actual_id'=ID4) + 0.25 : (x'=x-1) & (y'=y+1) & (actual_id'=ID2);
-	[] (x=0) & (y=1) -> 0.25 : (x'=x) & (y'=y) & (actual_id'=ID2) + 0.25 : (x'=x+1) & (y'=y) & (actual_id'=ID4) + 0.25 : (x'=x) & (y'=y-1) & (actual_id'=ID1) + 0.25 : (x'=x+1) & (y'=y-1) & (actual_id'=ID3);
-	[] (x=1) & (y=1) -> 0.25 : (x'=x) & (y'=y) & (actual_id'=ID4) + 0.25 : (x'=x-1) & (y'=y) & (actual_id'=ID2) + 0.25 : (x'=x) & (y'=y-1) & (actual_id'=ID3) + 0.25 : (x'=x-1) & (y'=y-1) & (actual_id'=ID1);
+	[] (x=0) & (y=0) -> 0.25 : (x'=x) & (y'=y) & (actual_id'=id) + 0.25 : (x'=x+1) & (y'=y) & (actual_id'=iddd) + 0.25 : (x'=x) & (y'=y+1) & (actual_id'=idd) + 0.25 : (x'=x+1) & (y'=y+1) & (actual_id'=idddd); 
+	[] (x=1) & (y=0) -> 0.25 : (x'=x) & (y'=y) & (actual_id'=iddd) + 0.25 : (x'=x-1) & (y'=y) & (actual_id'=id) + 0.25 : (x'=x) & (y'=y+1) & (actual_id'=idddd) + 0.25 : (x'=x-1) & (y'=y+1) & (actual_id'=idd);
+	[] (x=0) & (y=1) -> 0.25 : (x'=x) & (y'=y) & (actual_id'=idd) + 0.25 : (x'=x+1) & (y'=y) & (actual_id'=idddd) + 0.25 : (x'=x) & (y'=y-1) & (actual_id'=id) + 0.25 : (x'=x+1) & (y'=y-1) & (actual_id'=iddd);
+	[] (x=1) & (y=1) -> 0.25 : (x'=x) & (y'=y) & (actual_id'=idddd) + 0.25 : (x'=x-1) & (y'=y) & (actual_id'=idd) + 0.25 : (x'=x) & (y'=y-1) & (actual_id'=iddd) + 0.25 : (x'=x-1) & (y'=y-1) & (actual_id'=id);
 
 endmodule
 
+// QUI FACCIAMO IL VERO LEGAME
 module cell1
 
 	state1 : [0..1] init 0;
 
-	[] (state1=0) -> (state1'=1);
-	[] (state1=1) -> (state1'=0);
+	// LA DIFFERENZA: La cella 1 può passare a 1 (occupata) SOLO SE l'actual_id del robot è uguale a 1 (cioè 'id')
+	[] (state1=0) & (actual_id=id) -> (state1'=1);
+	
+	// La cella si libera solo se il robot NON è più sopra di lei
+	[] (state1=1) & (actual_id!=id) -> (state1'=0);
 
 endmodule 
 
+// GRIP prende questo modulo e, quando fa lo scambio per cell2, trasforma "actual_id=id" in "actual_id=idd" in automatico!
 module cell2 = cell1 [ state1 = state2, state2 = state1 ] endmodule 
 module cell3 = cell1 [ state1 = state3, state3 = state1 ] endmodule 
 module cell4 = cell1 [ state1 = state4, state4 = state1 ] endmodule
