@@ -40,11 +40,33 @@ the creation of a pure probabilistic model that uses probability to let the robo
 - stay in the same place and gather information
 
 - eventually if he gather information it changes the probability on the direction it takes (is more probable that he moves instead of staying in the same place)
+  
   - after staying once in the same place the probability won't reset until he moves away from a specific cell.
 
 - if a bord is hitten it can move in less direction
 
-### Hypothesis 2:
+
+
+The  probability is calculated in two different way for the different cases: 
+
+- When the robot is on a new cell in the round:
+  
+  where n is the number of possible moves for the robot
+  
+  ```mathml
+  1/n        
+  ```
+
+- When the robot is still cell in the round:
+  
+   where n is the number of possible moves for the robot
+  
+  ```mathml
+  2/(n*2 - 1) for the possible moves where the robot moves
+  1/(n*2 - 1) if the robot stand still         
+  ```
+
+### Hypothsis 2:
 
 ##### Idea 1:
 
@@ -88,3 +110,28 @@ So we can try to model that, we create multiple modules that changes just when t
 The important notion is that n - 1 cells are actively symmetrical during the entire execution because we model the state occupaed or not, instead of X e Y position.
 
 This can produce a specific model in the form of different states reachable based on the position of the robot.
+
+The idea is that the final model will be in the form: 
+
+```c
+module robot:
+    [] state where one cell is active and the other are iinactive
+    [] ....
+
+```
+
+In some sort of way we have to force GRIP (in some way) to describe each state possible as states usable. 
+
+#### Problems:
+
+- Modelling the problem in the way described directly would negate the use of GRIP 
+
+- To build this kind of model fo GRIP one would need a way to unequivocally recognize the single cell as active 
+  
+  - This would require a more profound study on how to use GRIP to understand and try to reverse the process (not possible for time issues during this study)
+
+- We aren't able to use ID or other recognizer of the cell because of the limit of GRIP
+
+- The main way is to try a functional approach that abstract the movements\
+
+#### Idea 3
